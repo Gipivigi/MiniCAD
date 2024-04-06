@@ -1,13 +1,17 @@
+import java.awt.*;
+
 public class Rettangolo
 {
     int width;
     int height;
     int puntoIniziale;
-    public Rettangolo(int width, int height, int puntoIniziale)
+    Color c;
+    public Rettangolo(int width, int height, int puntoIniziale, Color c)
     {
         this.width=width;
         this.height=height;
         this.puntoIniziale=puntoIniziale;
+        this.c=c;
     }
     public int getWidth()
     {
@@ -21,6 +25,9 @@ public class Rettangolo
     {
         return puntoIniziale;
     }
+    public Color getC() {
+        return c;
+    }
     public void setHeight(int height)
     {
         this.height = height;
@@ -32,5 +39,9 @@ public class Rettangolo
     public void setPuntoIniziale(int puntoIniziale)
     {
         this.puntoIniziale = puntoIniziale;
+    }
+    public void setC(Color c)
+    {
+        this.c = c;
     }
 }
