@@ -4,27 +4,29 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CommandPanel extends JPanel implements ActionListener
+public class CommandPanel extends JPanel
 {
     JButton JBline;
     JButton JBcircle;
     JButton JBrectangle;
     JButton JBpoint;
 
+    boolean line=false, circle=false, rectangle=false, point=false;
+
     public CommandPanel()
     {
         Icon line=new ImageIcon("./images/icons/line-cmd.bmp");
         JBline=new JButton(line);
-        JBline.addActionListener(this);
+        JBline.setActionCommand("line");
         Icon rectangle=new ImageIcon("./images/icons/rect-cmd.bmp");
         JBrectangle=new JButton(rectangle);
-        JBrectangle.addActionListener(this);
+        JBrectangle.setActionCommand("rectangle");
         Icon circle=new ImageIcon("./images/icons/center-rad-cmd.bmp");
         JBcircle=new JButton(circle);
-        JBcircle.addActionListener(this);
+        JBcircle.setActionCommand("circle");
         Icon point=new ImageIcon("./images/icons/point-cmd.bmp");
         JBpoint=new JButton(point);
-        JBpoint.addActionListener(this);
+        JBpoint.setActionCommand("point");
         JBline.setPreferredSize(new Dimension(line.getIconWidth(), line.getIconHeight()));
         JBrectangle.setPreferredSize(new Dimension(rectangle.getIconWidth(), rectangle.getIconHeight()));
         JBcircle.setPreferredSize(new Dimension(circle.getIconWidth(), circle.getIconHeight()));
@@ -33,9 +35,7 @@ public class CommandPanel extends JPanel implements ActionListener
         add(JBrectangle);
         add(JBcircle);
         add(JBpoint);
+        repaint();
     }
-    public void actionPerformed(ActionEvent e)
-    {
 
-    }
 }

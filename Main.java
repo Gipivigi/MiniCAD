@@ -1,7 +1,13 @@
+import javax.swing.*;
+
 public class Main
 {
     public static void main(String[] args)
     {
-        FinestraMiniCAD finestra= new FinestraMiniCAD();
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                new FinestraMiniCAD();
+            }
+        });
     }
 }
