@@ -4,9 +4,9 @@ public class Cerchio
 {
     int width;
     int height;
-    int puntoIniziale;
+    Punto puntoIniziale;
     Color c;
-    public Cerchio(int width, int height, int puntoIniziale, Color c)
+    public Cerchio(int width, int height, Punto puntoIniziale, Color c)
     {
         this.width=width;
         this.height=height;
@@ -21,7 +21,7 @@ public class Cerchio
     {
         return height;
     }
-    public int getPuntoIniziale()
+    public Punto getPuntoIniziale()
     {
         return puntoIniziale;
     }
@@ -37,7 +37,7 @@ public class Cerchio
     {
         this.width = width;
     }
-    public void setPuntoIniziale(int puntoIniziale)
+    public void setPuntoIniziale(Punto puntoIniziale)
     {
         this.puntoIniziale = puntoIniziale;
     }

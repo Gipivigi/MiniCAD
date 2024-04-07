@@ -4,9 +4,9 @@ public class Rettangolo
 {
     int width;
     int height;
-    int puntoIniziale;
+    Punto puntoIniziale;
     Color c;
-    public Rettangolo(int width, int height, int puntoIniziale, Color c)
+    public Rettangolo(int width, int height, Punto puntoIniziale, Color c)
     {
         this.width=width;
         this.height=height;
@@ -21,7 +21,7 @@ public class Rettangolo
     {
         return height;
     }
-    public int getPuntoIniziale()
+    public Punto getPuntoIniziale()
     {
         return puntoIniziale;
     }
@@ -36,7 +36,7 @@ public class Rettangolo
     {
         this.width = width;
     }
-    public void setPuntoIniziale(int puntoIniziale)
+    public void setPuntoIniziale(Punto puntoIniziale)
     {
         this.puntoIniziale = puntoIniziale;
     }
