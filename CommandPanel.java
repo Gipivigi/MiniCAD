@@ -10,8 +10,9 @@ public class CommandPanel extends JPanel
     JButton JBcircle;
     JButton JBrectangle;
     JButton JBpoint;
+    JButton JBselectColor;
 
-    boolean line=false, circle=false, rectangle=false, point=false;
+    boolean line=false, circle=false, rectangle=false, point=false, selectColor=false;
 
     public CommandPanel()
     {
@@ -27,14 +28,19 @@ public class CommandPanel extends JPanel
         Icon point=new ImageIcon("./images/icons/point-cmd.bmp");
         JBpoint=new JButton(point);
         JBpoint.setActionCommand("point");
+        Icon selectColor=new ImageIcon("./images/icons/color.png");
+        JBselectColor=new JButton(selectColor);
+        JBselectColor.setActionCommand("selectColor");
         JBline.setPreferredSize(new Dimension(line.getIconWidth(), line.getIconHeight()));
         JBrectangle.setPreferredSize(new Dimension(rectangle.getIconWidth(), rectangle.getIconHeight()));
         JBcircle.setPreferredSize(new Dimension(circle.getIconWidth(), circle.getIconHeight()));
         JBpoint.setPreferredSize(new Dimension(point.getIconWidth(), point.getIconHeight()));
+        JBselectColor.setPreferredSize(new Dimension(selectColor.getIconWidth(),selectColor.getIconHeight()));
         add(JBline);
         add(JBrectangle);
         add(JBcircle);
         add(JBpoint);
+        add(JBselectColor);
         repaint();
     }
 

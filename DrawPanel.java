@@ -113,7 +113,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     {
 
     }
-
     @Override
     public void mouseMoved(MouseEvent e)
     {
@@ -142,14 +141,10 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                     xRect=r.puntoIniziale.getX();
                     yRect=r.puntoIniziale.getY();
                     repaint();
-
                     break;
                 default:
                     break;
             }
-
-
-
         }
     }
 }
