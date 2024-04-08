@@ -58,7 +58,12 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 circlesList.remove(circlesList.size()-1);
                 lastCircle=false;
             }
-
+        }
+        for (int i=0; i<pointsList.size(); i++)
+        {
+            Punto p=new Punto(pointsList.get(i).getX(), pointsList.get(i).getY(), pointsList.get(i).getColor());
+            g.setColor(p.getColor());
+            g.fillOval(p.getX(), p.getY(), 10,10);
         }
 
     }
@@ -96,6 +101,9 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                     case 3:
                         circlesList.add(new Cerchio(0,0,new Punto(x1,y1,Color.BLACK),Color.BLACK));
                         drawing=true;
+                        break;
+                    case 4:
+                        pointsList.add(new Punto(x1-5,y1-5,Color.black));
                         break;
                     default:
                         break;
