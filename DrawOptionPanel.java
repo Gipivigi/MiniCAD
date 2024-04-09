@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-
 public class DrawOptionPanel extends JPanel
 {
     JButton JBThickness1;
