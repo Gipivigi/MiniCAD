@@ -7,6 +7,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
 {
     CommandPanel JPCommand;
     DrawPanel JPDraw;
+    DrawOptionPanel JPOption;
     Container contents;
     boolean line=false, circle=false, rectangle=false, point=false;
     public FinestraMiniCAD()
@@ -17,10 +18,12 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         getContentPane().setLayout(new BorderLayout());
         JPCommand=new CommandPanel();
         JPDraw=new DrawPanel();
+        JPOption= new DrawOptionPanel();
         contents=getContentPane();
         contents.setLayout(new BorderLayout());
         contents.add(JPCommand, BorderLayout.NORTH);
         contents.add(JPDraw, BorderLayout.CENTER);
+        contents.add(JPOption, BorderLayout.SOUTH);
         setVisible(true);
         JPCommand.JBline.addActionListener(this);
         JPCommand.JBcircle.addActionListener(this);
