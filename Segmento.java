@@ -5,11 +5,21 @@ public class Segmento
     Punto puntoIniziale = null;
     Punto puntoFinale = null;
     Color c;
-    public Segmento(Punto puntoIniziale, Punto puntoFinale, Color c)
+    int thickness;
+    public Segmento(Punto puntoIniziale, Punto puntoFinale, Color c, int thickness)
     {
         this.puntoIniziale=puntoIniziale;
         this.puntoFinale=puntoFinale;
         this.c=c;
+        this.thickness=thickness;
+    }
+
+    public Segmento(Segmento s)
+    {
+        this.puntoIniziale=s.getPuntoIniziale();
+        this.puntoFinale=s.getPuntoFinale();
+        this.c=s.getC();
+        this.thickness=s.getThickness();
     }
     public Punto getPuntoIniziale()
     {
@@ -22,6 +32,12 @@ public class Segmento
     public Color getC()
     {
         return c;
+    }
+    public int getThickness(){
+        return thickness;
+    }
+    public void setThickness(int thickness){
+        this.thickness=thickness;
     }
     public void setPuntoIniziale(Punto puntoIniziale)
     {

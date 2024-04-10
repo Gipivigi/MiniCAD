@@ -6,12 +6,23 @@ public class Rettangolo
     int height;
     Punto puntoIniziale;
     Color c;
-    public Rettangolo(int width, int height, Punto puntoIniziale, Color c)
+    int thickness;
+    public Rettangolo(int width, int height, Punto puntoIniziale, Color c, int thickness)
     {
         this.width=width;
         this.height=height;
         this.puntoIniziale=puntoIniziale;
         this.c=c;
+        this.thickness=thickness;
+    }
+
+    public Rettangolo(Rettangolo r)
+    {
+        this.width=r.getWidth();
+        this.height=r.getHeight();
+        this.puntoIniziale=r.getPuntoIniziale();
+        this.c=r.getC();
+        this.thickness=r.getThickness();
     }
     public int getWidth()
     {
@@ -27,6 +38,12 @@ public class Rettangolo
     }
     public Color getC() {
         return c;
+    }
+    public int getThickness(){
+        return thickness;
+    }
+    public void setThickness(int thickness){
+        this.thickness=thickness;
     }
     public void setHeight(int height)
     {

@@ -29,13 +29,18 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPCommand.JBcircle.addActionListener(this);
         JPCommand.JBrectangle.addActionListener(this);
         JPCommand.JBpoint.addActionListener(this);
+        JPOption.JBThickness1.addActionListener(this);
+        JPOption.JBThickness2.addActionListener(this);
+        JPOption.JBThickness3.addActionListener(this);
+        JPOption.JBThickness4.addActionListener(this);
+        JPOption.JBThickness5.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent e)
     {
         String command=e.getActionCommand();
-        //System.out.println(command);
+        System.out.println(command);
         switch(command)
         {
             case "line":
@@ -49,6 +54,21 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 break;
             case "point":
                 JPDraw.setFigure(4);
+                break;
+            case"thickness_1":
+                JPDraw.setThickness(1);
+                break;
+            case"thickness_2":
+                JPDraw.setThickness(2);
+                break;
+            case"thickness_3":
+                JPDraw.setThickness(3);
+                break;
+            case"thickness_4":
+                JPDraw.setThickness(4);
+                break;
+            case"thickness_5":
+                JPDraw.setThickness(5);
                 break;
             default:
 

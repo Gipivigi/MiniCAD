@@ -5,11 +5,21 @@ public class Punto
     private int x=-500;
     private int y=-500;
     private Color c;
-    public Punto(int x, int y, Color c)
+    private int thickness;
+    public Punto(int x, int y, Color c, int thickness)
     {
         this.x=x;
         this.y=y;
         this.c=c;
+        this.thickness=thickness;
+    }
+
+    public Punto(Punto p)
+    {
+        this.x=p.getX();
+        this.y=p.getY();
+        this.c=p.getColor();
+        this.thickness=p.getThickness();
     }
     public int getX()
     {
@@ -22,6 +32,12 @@ public class Punto
     public Color getColor()
     {
         return c;
+    }
+    public int getThickness(){
+        return thickness;
+    }
+    public void setThickness(int thickness){
+        this.thickness=thickness;
     }
     public void setX(int x)
     {

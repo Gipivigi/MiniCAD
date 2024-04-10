@@ -9,7 +9,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     ArrayList<Cerchio> circlesList=new ArrayList<>();
     ArrayList<Punto> pointsList=new ArrayList<>();
     ArrayList<Rettangolo> rectanglesList=new ArrayList<>();
-    int figure=0, xRect=0, yRect=0, xCirc=0, yCirc=0;
+    int figure=0, thickness= 1, xRect=0, yRect=0, xCirc=0, yCirc=0;
     Boolean drawing=false, lastRectangle=false, lastCircle=false;
 
 
@@ -23,21 +23,22 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void paintComponent(Graphics g)
     {
-        super.paintComponent(g);
-        g.setColor(Color.green);
-        // Disegna un rettangolo che copre l'intera area del pannello
-        g.fillRect(0, 0, getWidth(), getHeight());
+        Graphics2D g2d=(Graphics2D) g;
+        super.paintComponent(g2d);
+
         for(int i=0; i<segmentsList.size(); i++)
         {
-            Segmento s=new Segmento(segmentsList.get(i).getPuntoIniziale(), segmentsList.get(i).getPuntoFinale(), segmentsList.get(i).getC());
-            g.setColor(s.getC());
-            g.drawLine(s.getPuntoIniziale().getX(), s.getPuntoIniziale().getY(), s.getPuntoFinale().getX(), s.getPuntoFinale().getY());
+            Segmento s=new Segmento(segmentsList.get(i));
+            g2d.setStroke(new BasicStroke(s.getThickness()));
+            g2d.setColor(s.getC());
+            g2d.drawLine(s.getPuntoIniziale().getX(), s.getPuntoIniziale().getY(), s.getPuntoFinale().getX(), s.getPuntoFinale().getY());
         }
         for(int i=0; i<rectanglesList.size(); i++)
         {
-            Rettangolo r=new Rettangolo(rectanglesList.get(i).getWidth(),rectanglesList.get(i).getHeight(),rectanglesList.get(i).getPuntoIniziale(),Color.BLACK);
-            g.setColor(r.getC());
-            g.drawRect(r.getPuntoIniziale().getX(),r.getPuntoIniziale().getY(),r.getWidth(),r.getHeight());
+            Rettangolo r=new Rettangolo(rectanglesList.get(i));
+            g2d.setStroke(new BasicStroke(r.getThickness()));
+            g2d.setColor(r.getC());
+            g2d.drawRect(r.getPuntoIniziale().getX(),r.getPuntoIniziale().getY(),r.getWidth(),r.getHeight());
             xRect=0;
             yRect=0;
             if(drawing==false && lastRectangle==true)
@@ -48,9 +49,10 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         for(int i=0; i<circlesList.size(); i++)
         {
-            Cerchio c=new Cerchio(circlesList.get(i).getWidth(),circlesList.get(i).getHeight(),circlesList.get(i).getPuntoIniziale(),Color.BLACK);
-            g.setColor(c.getC());
-            g.drawOval(c.getPuntoIniziale().getX(),c.getPuntoIniziale().getY(),c.getWidth(),c.getHeight());
+            Cerchio c=new Cerchio(circlesList.get(i));
+            g2d.setStroke(new BasicStroke(c.getThickness()));
+            g2d.setColor(c.getC());
+            g2d.drawOval(c.getPuntoIniziale().getX(),c.getPuntoIniziale().getY(),c.getWidth(),c.getHeight());
             xCirc=0;
             yCirc=0;
             if(drawing==false && lastCircle==true)
@@ -61,9 +63,9 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         for (int i=0; i<pointsList.size(); i++)
         {
-            Punto p=new Punto(pointsList.get(i).getX(), pointsList.get(i).getY(), pointsList.get(i).getColor());
-            g.setColor(p.getColor());
-            g.fillOval(p.getX(), p.getY(), 10,10);
+            Punto p=new Punto(pointsList.get(i));
+            g2d.setColor(p.getColor());
+            g2d.fillOval(p.getX(), p.getY(), 10,10);
         }
 
     }
@@ -71,6 +73,11 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     public void setFigure(int figure)
     {
         this.figure=figure;
+    }
+
+    public void setThickness(int thickness)
+    {
+        this.thickness=thickness;
     }
 
 
@@ -91,19 +98,19 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 switch(figure)
                 {
                     case 1:
-                        segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK), new Punto (x2,y2, Color.BLACK), Color.BLACK));
+                        segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK,0), new Punto (x2,y2, Color.BLACK,0), Color.BLACK, thickness));
                         drawing=true;
                         break;
                     case 2:
-                        rectanglesList.add(new Rettangolo(0,0,new Punto(x1,y1,Color.BLACK),Color.BLACK));
+                        rectanglesList.add(new Rettangolo(0,0,new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
                         drawing=true;
                         break;
                     case 3:
-                        circlesList.add(new Cerchio(0,0,new Punto(x1,y1,Color.BLACK),Color.BLACK));
+                        circlesList.add(new Cerchio(0,0,new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
                         drawing=true;
                         break;
                     case 4:
-                        pointsList.add(new Punto(x1-5,y1-5,Color.black));
+                        pointsList.add(new Punto(x1-5,y1-5,Color.black, thickness));
                         break;
                     default:
                         break;
@@ -122,18 +129,18 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                         {
                             segmentsList.remove(segmentsList.size()-1);
                         }
-                        segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK), new Punto (x2,y2, Color.BLACK), Color.BLACK));
+                        segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK,0), new Punto (x2,y2, Color.BLACK,0), Color.BLACK, thickness));
                         drawing=false;
                         repaint();
                         break;
                     case 2:
-                        rectanglesList.add(new Rettangolo(xRect,yRect, new Punto(x1,y1,Color.BLACK),Color.BLACK));
+                        rectanglesList.add(new Rettangolo(xRect,yRect, new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
                         drawing=false;
                         lastRectangle=true;
                         repaint();
                         break;
                     case 3:
-                        circlesList.add(new Cerchio(xCirc,yCirc, new Punto(x1,y1,Color.BLACK),Color.BLACK));
+                        circlesList.add(new Cerchio(xCirc,yCirc, new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
                         drawing=false;
                         lastCircle=true;
                         repaint();
@@ -168,7 +175,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                     {
                         segmentsList.remove(segmentsList.size()-1);
                     }
-                    segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK), new Punto (x2,y2, Color.BLACK), Color.BLACK));
+                    segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK,0), new Punto (x2,y2, Color.BLACK,0), Color.BLACK, thickness));
                     repaint();
                     break;
                 case 2:

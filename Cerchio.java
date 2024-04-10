@@ -5,13 +5,23 @@ public class Cerchio
     int width;
     int height;
     Punto puntoIniziale;
+    int thickness;
     Color c;
-    public Cerchio(int width, int height, Punto puntoIniziale, Color c)
+    public Cerchio(int width, int height, Punto puntoIniziale, Color c, int thickness)
     {
         this.width=width;
         this.height=height;
         this.puntoIniziale=puntoIniziale;
         this.c=c;
+        this.thickness=thickness;
+    }
+    public Cerchio(Cerchio c)
+    {
+        this.width=c.getWidth();
+        this.height=c.getHeight();
+        this.puntoIniziale=c.getPuntoIniziale();
+        this.c=c.getC();
+        this.thickness=c.getThickness();
     }
     public int getWidth()
     {
@@ -25,6 +35,12 @@ public class Cerchio
     {
         return puntoIniziale;
     }
+    public int getThickness(){
+        return thickness;
+    }
+    public void setThickness(int thickness){
+        this.thickness=thickness;
+    }
     public Color getC()
     {
         return c;
@@ -37,6 +53,7 @@ public class Cerchio
     {
         this.width = width;
     }
+
     public void setPuntoIniziale(Punto puntoIniziale)
     {
         this.puntoIniziale = puntoIniziale;

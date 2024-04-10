@@ -49,7 +49,6 @@ public class CommandPanel extends JPanel
         add(JBcircle);
         add(JBpoint);
         add(JBselectColor);
-        repaint();
     }
     public Color getColor()
     {
