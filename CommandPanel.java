@@ -45,6 +45,7 @@ public class CommandPanel extends JPanel
             public void actionPerformed(ActionEvent e)
             {
                 selectedColor = JColorChooser.showDialog(null, "Seleziona un colore", Color.BLACK);
+                System.out.println(selectColor);
             }
         });
         add(JBCursor);

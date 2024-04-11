@@ -10,6 +10,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     ArrayList<Punto> pointsList=new ArrayList<>();
     ArrayList<Rettangolo> rectanglesList=new ArrayList<>();
     int figure=0, thickness= 1, xRect=0, yRect=0, xCirc=0, yCirc=0;
+    Color color=Color.black;
     Boolean drawing=false, lastRectangle=false, lastCircle=false;
 
 
@@ -93,7 +94,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         repaint();
     }
-
+    public void setColor(Color color){this.color=color;}
 
     @Override
     public void mouseEntered(MouseEvent e){}
@@ -115,19 +116,19 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                         selectFigure();
                         break;
                     case 1:
-                        segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK,0), new Punto (x2,y2, Color.BLACK,0), Color.BLACK, thickness));
+                        segmentsList.add(new Segmento(new Punto(x1,y1, color,0), new Punto (x2,y2, color,0), color, thickness));
                         drawing=true;
                         break;
                     case 2:
-                        rectanglesList.add(new Rettangolo(0,0,new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
+                        rectanglesList.add(new Rettangolo(0,0,new Punto(x1,y1,color,0),color, thickness));
                         drawing=true;
                         break;
                     case 3:
-                        circlesList.add(new Cerchio(0,0,new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
+                        circlesList.add(new Cerchio(0,0,new Punto(x1,y1,color,0),color, thickness));
                         drawing=true;
                         break;
                     case 4:
-                        pointsList.add(new Punto(x1-5,y1-5,Color.black, thickness));
+                        pointsList.add(new Punto(x1-5,y1-5,color, thickness));
                         break;
                     default:
                         break;
@@ -146,18 +147,18 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                         {
                             segmentsList.remove(segmentsList.size()-1);
                         }
-                        segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK,0), new Punto (x2,y2, Color.BLACK,0), Color.BLACK, thickness));
+                        segmentsList.add(new Segmento(new Punto(x1,y1, color,0), new Punto (x2,y2, color,0), color, thickness));
                         drawing=false;
                         repaint();
                         break;
                     case 2:
-                        rectanglesList.add(new Rettangolo(xRect,yRect, new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
+                        rectanglesList.add(new Rettangolo(xRect,yRect, new Punto(x1,y1,color,0),color, thickness));
                         drawing=false;
                         lastRectangle=true;
                         repaint();
                         break;
                     case 3:
-                        circlesList.add(new Cerchio(xCirc,yCirc, new Punto(x1,y1,Color.BLACK,0),Color.BLACK, thickness));
+                        circlesList.add(new Cerchio(xCirc,yCirc, new Punto(x1,y1,color,0),color, thickness));
                         drawing=false;
                         lastCircle=true;
                         repaint();
@@ -192,7 +193,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                     {
                         segmentsList.remove(segmentsList.size()-1);
                     }
-                    segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK,0), new Punto (x2,y2, Color.BLACK,0), Color.BLACK, thickness));
+                    segmentsList.add(new Segmento(new Punto(x1,y1,color,0), new Punto (x2,y2, color,0), color, thickness));
                     repaint();
                     break;
                 case 2:
