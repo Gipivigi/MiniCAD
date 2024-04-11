@@ -10,11 +10,15 @@ public class CommandPanel extends JPanel
     JButton JBrectangle;
     JButton JBpoint;
     JButton JBselectColor;
+    JButton JBCursor;
 
     Color selectedColor;
 
     public CommandPanel()
     {
+        Icon cursor=new ImageIcon("./images/icons/hand-cmd.bmp");
+        JBCursor=new JButton(cursor);
+        JBCursor.setActionCommand("cursor");
         Icon line=new ImageIcon("./images/icons/line-cmd.bmp");
         JBline=new JButton(line);
         JBline.setActionCommand("line");
@@ -30,6 +34,7 @@ public class CommandPanel extends JPanel
         Icon selectColor=new ImageIcon("./images/icons/color.png");
         JBselectColor=new JButton(selectColor);
         JBselectColor.setActionCommand("selectColor");
+        JBCursor.setPreferredSize(new Dimension(cursor.getIconWidth(), cursor.getIconHeight()));
         JBline.setPreferredSize(new Dimension(line.getIconWidth(), line.getIconHeight()));
         JBrectangle.setPreferredSize(new Dimension(rectangle.getIconWidth(), rectangle.getIconHeight()));
         JBcircle.setPreferredSize(new Dimension(circle.getIconWidth(), circle.getIconHeight()));
@@ -42,6 +47,7 @@ public class CommandPanel extends JPanel
                 selectedColor = JColorChooser.showDialog(null, "Seleziona un colore", Color.BLACK);
             }
         });
+        add(JBCursor);
         add(JBline);
         add(JBrectangle);
         add(JBcircle);

@@ -25,6 +25,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         contents.add(JPDraw, BorderLayout.CENTER);
         contents.add(JPOption, BorderLayout.SOUTH);
         setVisible(true);
+        JPCommand.JBCursor.addActionListener(this);
         JPCommand.JBline.addActionListener(this);
         JPCommand.JBcircle.addActionListener(this);
         JPCommand.JBrectangle.addActionListener(this);
@@ -43,6 +44,9 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         //System.out.println(command);
         switch(command)
         {
+            case "cursor":
+                JPDraw.setFigure(0);
+                break;
             case "line":
                 JPDraw.setFigure(1);
                 break;

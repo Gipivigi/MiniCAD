@@ -80,6 +80,20 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         this.thickness=thickness;
     }
 
+    public void selectFigure()
+    {
+        for(int i=0; i<segmentsList.size(); i++)
+        {
+            Segmento s=new Segmento(segmentsList.get(i));
+            if (x1>=Math.min(s.getPuntoIniziale().getX(), s.getPuntoFinale().getX()) && x1<=Math.max(s.getPuntoIniziale().getX(), s.getPuntoFinale().getX()) &&  y1>=Math.min(s.getPuntoIniziale().getY(), s.getPuntoFinale().getY()) && y1<=Math.max(s.getPuntoIniziale().getY(), s.getPuntoFinale().getY()))
+            {
+                segmentsList.get(i).setC(Color.cyan);
+                break;
+            }
+        }
+        repaint();
+    }
+
 
     @Override
     public void mouseEntered(MouseEvent e){}
@@ -97,6 +111,9 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 y2=(int) e.getY();
                 switch(figure)
                 {
+                    case 0:
+                        selectFigure();
+                        break;
                     case 1:
                         segmentsList.add(new Segmento(new Punto(x1,y1, Color.BLACK,0), new Punto (x2,y2, Color.BLACK,0), Color.BLACK, thickness));
                         drawing=true;
