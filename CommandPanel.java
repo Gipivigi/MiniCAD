@@ -12,7 +12,7 @@ public class CommandPanel extends JPanel
     JButton JBselectColor;
     JButton JBCursor;
 
-    Color selectedColor;
+
 
     public CommandPanel()
     {
@@ -40,24 +40,12 @@ public class CommandPanel extends JPanel
         JBcircle.setPreferredSize(new Dimension(circle.getIconWidth(), circle.getIconHeight()));
         JBpoint.setPreferredSize(new Dimension(point.getIconWidth(), point.getIconHeight()));
         JBselectColor.setPreferredSize(new Dimension(selectColor.getIconWidth(),selectColor.getIconHeight()));
-        JBselectColor.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e)
-            {
-                selectedColor = JColorChooser.showDialog(null, "Seleziona un colore", Color.BLACK);
-                System.out.println(selectColor);
-            }
-        });
         add(JBCursor);
         add(JBline);
         add(JBrectangle);
         add(JBcircle);
         add(JBpoint);
         add(JBselectColor);
-    }
-    public Color getColor()
-    {
-        return selectedColor;
     }
 
 }

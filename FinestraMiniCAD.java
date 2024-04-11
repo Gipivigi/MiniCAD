@@ -9,6 +9,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     DrawPanel JPDraw;
     DrawOptionPanel JPOption;
     Container contents;
+    Color selectedColor;
     boolean line=false, circle=false, rectangle=false, point=false;
     public FinestraMiniCAD()
     {
@@ -30,6 +31,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPCommand.JBcircle.addActionListener(this);
         JPCommand.JBrectangle.addActionListener(this);
         JPCommand.JBpoint.addActionListener(this);
+        JPCommand.JBselectColor.addActionListener(this);
         JPOption.JBThickness1.addActionListener(this);
         JPOption.JBThickness2.addActionListener(this);
         JPOption.JBThickness3.addActionListener(this);
@@ -75,7 +77,8 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 JPDraw.setThickness(5);
                 break;
             case "selectColor":
-                JPDraw.setColor(JPCommand.getColor());
+                selectedColor = JColorChooser.showDialog(null, "Seleziona un colore", Color.BLACK);
+                JPDraw.setColor(selectedColor);
                 break;
             default:
 
