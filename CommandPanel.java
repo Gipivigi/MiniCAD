@@ -13,8 +13,6 @@ public class CommandPanel extends JPanel
 
     Color selectedColor;
 
-    boolean line=false, circle=false, rectangle=false, point=false, selectColor=false;
-
     public CommandPanel()
     {
         Icon line=new ImageIcon("./images/icons/line-cmd.bmp");
