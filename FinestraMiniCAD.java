@@ -70,6 +70,9 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
             case"thickness_5":
                 JPDraw.setThickness(5);
                 break;
+            case "selectColor":
+                JPDraw.setColor(JPCommand.getColor());
+                break;
             default:
 
                 break;
