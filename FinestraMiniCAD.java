@@ -2,12 +2,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import java.util.ArrayList;
 
 public class FinestraMiniCAD extends JFrame implements ActionListener
 {
     CommandPanel JPCommand;
     DrawPanel JPDraw;
     DrawOptionPanel JPOption;
+    SidePanel JPSidePanel;
     Container contents;
     Color selectedColor;
     boolean line=false, circle=false, rectangle=false, point=false;
@@ -20,12 +23,13 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPCommand=new CommandPanel();
         JPDraw=new DrawPanel();
         JPOption= new DrawOptionPanel();
+        JPSidePanel=new SidePanel();
         contents=getContentPane();
         contents.setLayout(new BorderLayout());
         contents.add(JPCommand, BorderLayout.NORTH);
         contents.add(JPDraw, BorderLayout.CENTER);
         contents.add(JPOption, BorderLayout.SOUTH);
-        setVisible(true);
+        contents.add(JPSidePanel, BorderLayout.WEST);
         JPCommand.JBCursor.addActionListener(this);
         JPCommand.JBline.addActionListener(this);
         JPCommand.JBcircle.addActionListener(this);
@@ -37,6 +41,10 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPOption.JBThickness3.addActionListener(this);
         JPOption.JBThickness4.addActionListener(this);
         JPOption.JBThickness5.addActionListener(this);
+        JPSidePanel.JBSave.addActionListener(this);
+        JPSidePanel.JBLoad.addActionListener(this);
+        JPSidePanel.JBDel.addActionListener(this);
+        setVisible(true);
     }
 
     @Override
@@ -80,6 +88,40 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 selectedColor = JColorChooser.showDialog(null, "Seleziona un colore", Color.BLACK);
                 JPDraw.setColor(selectedColor);
                 break;
+            case "save":
+                try{
+                    ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("projects/First_drawing.bin"));
+                    stream.writeObject(JPDraw.getCirclesList());
+                    stream.writeObject(JPDraw.getRectanglesList());
+                    stream.writeObject(JPDraw.getSegmentsList());
+                    stream.writeObject(JPDraw.getPointsList());
+                    stream.close();
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
+                break;
+            case "load":
+                ObjectInputStream stream = null;
+                try {
+                    stream = new ObjectInputStream(new FileInputStream("projects/First_drawing.bin"));
+                    JPDraw.setCirclesList((ArrayList<Cerchio>) stream.readObject());
+                    JPDraw.setRectanglesList((ArrayList<Rettangolo>) stream.readObject());
+                    JPDraw.setSegmentsList((ArrayList<Segmento>) stream.readObject());
+                    JPDraw.setPointsList((ArrayList<Punto>) stream.readObject());
+                    JPDraw.repaint();
+                    stream.close();
+                } catch (IOException ex) {
+                    System.err.println("Errore durante il caricamento del file: " + ex.getMessage());
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+                break;
+            case "del":
+                File file = new File("projects/First_drawing.bin");
+                if (file.exists())
+                    file.delete();
+                else
+                    System.err.println("Nessun file presente!");
             default:
 
                 break;

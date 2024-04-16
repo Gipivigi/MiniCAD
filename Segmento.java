@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class Segmento
+public class Segmento implements Serializable
 {
     Punto puntoIniziale = null;
     Punto puntoFinale = null;

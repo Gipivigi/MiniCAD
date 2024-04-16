@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class Punto
+public class Punto implements Serializable
 {
     private int x=-500;
     private int y=-500;

@@ -81,6 +81,15 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         this.thickness=thickness;
     }
 
+    public ArrayList<Cerchio> getCirclesList() {return circlesList;}
+    public ArrayList<Punto> getPointsList(){return pointsList;}
+    public ArrayList<Segmento> getSegmentsList() {return segmentsList;}
+    public ArrayList<Rettangolo> getRectanglesList() {return rectanglesList;}
+    public void setPointsList(ArrayList<Punto> pointsList) {this.pointsList = pointsList;}
+    public void setCirclesList(ArrayList<Cerchio> circlesList) {this.circlesList = circlesList;}
+    public void setSegmentsList(ArrayList<Segmento> segmentsList) {this.segmentsList = segmentsList;}
+    public void setRectanglesList(ArrayList<Rettangolo> rectanglesList) {this.rectanglesList = rectanglesList;}
+
     public void selectFigure()
     {
         for(int i=0; i<segmentsList.size(); i++)

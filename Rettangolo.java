@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class Rettangolo
+public class Rettangolo implements Serializable
 {
     int width;
     int height;

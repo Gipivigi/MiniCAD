@@ -1,6 +1,7 @@
 import java.awt.*;
+import java.io.Serializable;
 
-public class Cerchio
+public class Cerchio implements Serializable
 {
     int width;
     int height;
