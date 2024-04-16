@@ -101,6 +101,29 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 break;
             }
         }
+        for (int i=0; i<circlesList.size(); i++) {
+            Cerchio c=new Cerchio(circlesList.get(i));
+            int ovalCenterX=c.getPuntoIniziale().getX()+c.getWidth()/2;
+            int ovalCenterY=c.getPuntoIniziale().getY()+c.getHeight()/2;
+            int radius=(int)Math.sqrt(c.getWidth()*c.getWidth()/4.0+c.getHeight()*c.getHeight()/4.0);
+            if (x1>=ovalCenterX-radius && x1<=ovalCenterX+radius && y1>=ovalCenterY-radius && y1<=ovalCenterY+radius)
+            {
+                circlesList.get(i).setC(Color.cyan);
+                break;
+            }
+        }
+        for (int i=0; i<rectanglesList.size(); i++) {
+            Rettangolo r=new Rettangolo(rectanglesList.get(i));
+            int originPointX=r.getPuntoIniziale().getX();
+            int originPointY=r.getPuntoIniziale().getY();
+            int oppostoX=originPointX+r.getWidth();
+            int oppostoY=originPointY+r.getHeight();
+            if((x1 >= originPointX && x1 <= oppostoX) && (y1 >= originPointY && y1 <= oppostoY))
+            {
+                rectanglesList.get(i).setC(Color.CYAN);
+                break;
+            }
+        }
         repaint();
     }
     public void setColor(Color color){this.color=color;}
