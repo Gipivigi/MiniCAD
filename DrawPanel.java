@@ -10,8 +10,10 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     ArrayList<Punto> pointsList=new ArrayList<>();
     ArrayList<Rettangolo> rectanglesList=new ArrayList<>();
     int figure=0, thickness= 1, xRect=0, yRect=0, xCirc=0, yCirc=0;
-    Color color=Color.black;
+    Color color=Color.black, lastColor;
     Boolean drawing=false, lastRectangle=false, lastCircle=false;
+    Boolean selectedLine=false, selectedCircle=false, selectedRectangle=false, lastDelete=false;
+    int indexOfLine, indexOfCircle, indexOfRectangle;
 
 
     int x1=0, y1=0, x2=0, y2=0;
@@ -94,25 +96,36 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     {
         for(int i=0; i<segmentsList.size(); i++)
         {
+            if(selectedLine || selectedRectangle || selectedCircle) break;
             Segmento s=new Segmento(segmentsList.get(i));
             if (x1>=Math.min(s.getPuntoIniziale().getX(), s.getPuntoFinale().getX()) && x1<=Math.max(s.getPuntoIniziale().getX(), s.getPuntoFinale().getX()) &&  y1>=Math.min(s.getPuntoIniziale().getY(), s.getPuntoFinale().getY()) && y1<=Math.max(s.getPuntoIniziale().getY(), s.getPuntoFinale().getY()))
             {
+                lastColor=segmentsList.get(i).getC();
                 segmentsList.get(i).setC(Color.cyan);
+                selectedLine=true;
+                indexOfLine=i;
                 break;
             }
         }
-        for (int i=0; i<circlesList.size(); i++) {
+        for (int i=0; i<circlesList.size(); i++)
+        {
+            if(selectedLine || selectedRectangle || selectedCircle) break;
             Cerchio c=new Cerchio(circlesList.get(i));
             int ovalCenterX=c.getPuntoIniziale().getX()+c.getWidth()/2;
             int ovalCenterY=c.getPuntoIniziale().getY()+c.getHeight()/2;
             int radius=(int)Math.sqrt(c.getWidth()*c.getWidth()/4.0+c.getHeight()*c.getHeight()/4.0);
             if (x1>=ovalCenterX-radius && x1<=ovalCenterX+radius && y1>=ovalCenterY-radius && y1<=ovalCenterY+radius)
             {
+                lastColor=circlesList.get(i).getC();
+                selectedCircle=true;
+                indexOfCircle=i;
                 circlesList.get(i).setC(Color.cyan);
                 break;
             }
         }
-        for (int i=0; i<rectanglesList.size(); i++) {
+        for (int i=0; i<rectanglesList.size(); i++)
+        {
+            if(selectedLine || selectedRectangle || selectedCircle) break;
             Rettangolo r=new Rettangolo(rectanglesList.get(i));
             int originPointX=r.getPuntoIniziale().getX();
             int originPointY=r.getPuntoIniziale().getY();
@@ -120,13 +133,91 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             int oppostoY=originPointY+r.getHeight();
             if((x1 >= originPointX && x1 <= oppostoX) && (y1 >= originPointY && y1 <= oppostoY))
             {
+                lastColor=rectanglesList.get(i).getC();
+                selectedRectangle=true;
+                indexOfRectangle=i;
                 rectanglesList.get(i).setC(Color.CYAN);
                 break;
             }
         }
         repaint();
     }
-    public void setColor(Color color){this.color=color;}
+    public void setColor(Color color)
+    {
+        if(!(selectedLine && selectedRectangle && selectedCircle))
+        {
+            this.color=color;
+        }
+
+        if(selectedLine)
+        {
+            resetSelected();
+            segmentsList.get(indexOfLine).setC(color);
+            repaint();
+            color=Color.BLACK;
+        }
+
+        if(selectedCircle)
+        {
+            resetSelected();
+            circlesList.get(indexOfCircle).setC(color);
+            repaint();
+        }
+
+        if(selectedRectangle)
+        {
+            resetSelected();
+            rectanglesList.get(indexOfRectangle).setC(color);
+            repaint();
+        }
+    }
+
+    public void deleteFigure()
+    {
+        if(selectedLine)
+        {
+            segmentsList.remove(indexOfLine);
+            lastDelete=true;
+        }
+        if(selectedCircle)
+        {
+            circlesList.remove(indexOfCircle);
+            lastDelete=true;
+        }
+        if(selectedRectangle)
+        {
+            rectanglesList.remove(indexOfRectangle);
+            lastDelete=true;
+        }
+        resetSelected();
+        repaint();
+    }
+
+    public void resetSelected()
+    {
+        if(!(lastDelete))
+        {
+            if (selectedLine && segmentsList.get(indexOfLine) != null) {
+                segmentsList.get(indexOfLine).setC(lastColor);
+            }
+
+            if (selectedCircle && circlesList.get(indexOfCircle) != null) {
+                circlesList.get(indexOfCircle).setC(lastColor);
+            }
+
+            if (selectedRectangle && rectanglesList.get(indexOfRectangle) != null) {
+                rectanglesList.get(indexOfRectangle).setC(lastColor);
+            }
+        }
+        else
+        {
+            lastDelete=false;
+        }
+        selectedLine=false;
+        selectedCircle=false;
+        selectedRectangle=false;
+        repaint();
+    }
 
     @Override
     public void mouseEntered(MouseEvent e){}

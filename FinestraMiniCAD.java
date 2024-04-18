@@ -36,6 +36,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPCommand.JBrectangle.addActionListener(this);
         JPCommand.JBpoint.addActionListener(this);
         JPCommand.JBselectColor.addActionListener(this);
+        JPCommand.JBDelSelected.addActionListener(this);
         JPOption.JBThickness1.addActionListener(this);
         JPOption.JBThickness2.addActionListener(this);
         JPOption.JBThickness3.addActionListener(this);
@@ -55,18 +56,23 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         switch(command)
         {
             case "cursor":
+                JPDraw.resetSelected();
                 JPDraw.setFigure(0);
                 break;
             case "line":
+                JPDraw.resetSelected();
                 JPDraw.setFigure(1);
                 break;
             case "rectangle":
+                JPDraw.resetSelected();
                 JPDraw.setFigure(2);
                 break;
             case "circle":
+                JPDraw.resetSelected();
                 JPDraw.setFigure(3);
                 break;
             case "point":
+                JPDraw.resetSelected();
                 JPDraw.setFigure(4);
                 break;
             case"thickness_1":
@@ -83,6 +89,9 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 break;
             case"thickness_5":
                 JPDraw.setThickness(5);
+                break;
+            case "DeleteFigure":
+                JPDraw.deleteFigure();
                 break;
             case "selectColor":
                 selectedColor = JColorChooser.showDialog(null, "Seleziona un colore", Color.BLACK);
