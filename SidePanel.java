@@ -6,7 +6,9 @@ public class SidePanel extends JPanel
     JButton JBSave;
     JButton JBLoad;
     JButton JBDel;
-    public SidePanel() {
+    public SidePanel()
+    {
+        setLayout(new GridLayout(15,1));
         Icon save = new ImageIcon("./images/icons/save_file.png");
         JBSave = new JButton(save);
         JBSave.setActionCommand("save");
@@ -17,10 +19,13 @@ public class SidePanel extends JPanel
         JBDel = new JButton(del);
         JBDel.setActionCommand("del");
         JBSave.setPreferredSize(new Dimension(save.getIconWidth(), save.getIconHeight()));
-        JBLoad.setPreferredSize(new Dimension(save.getIconWidth(), save.getIconHeight()));
-        JBDel.setPreferredSize(new Dimension(save.getIconWidth(), save.getIconHeight()));
+        JBLoad.setPreferredSize(new Dimension(load.getIconWidth(), load.getIconHeight()));
+        JBDel.setPreferredSize(new Dimension(del.getIconWidth(), del.getIconHeight()));
         add(JBSave);
         add(JBLoad);
         add(JBDel);
+        for(int i=0; i<12; i++){
+            add(new JPanel());
+        }
     }
 }
