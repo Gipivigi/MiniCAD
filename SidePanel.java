@@ -24,8 +24,6 @@ public class SidePanel extends JPanel
         add(JBSave);
         add(JBLoad);
         add(JBDel);
-        for(int i=0; i<12; i++){
-            add(new JPanel());
-        }
+        for(int i=0; i<12; i++){add(new JPanel());}
     }
 }

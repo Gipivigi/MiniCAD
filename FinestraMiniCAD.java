@@ -98,8 +98,26 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 JPDraw.setColor(selectedColor);
                 break;
             case "save":
+                JFileChooser fileChooser = new JFileChooser();
+                fileChooser.setMultiSelectionEnabled(true);
+                int value = fileChooser.showSaveDialog(null);
+                if (value == JFileChooser.APPROVE_OPTION) {
+                    File[] selectedFiles = fileChooser.getSelectedFiles();
+                    for (File file : selectedFiles) {
+                        if (file.exists()) {
+                            System.out.println("Il file " + file.getName() + " è già presente. Non è stato salvato nuovamente.");
+                        } else {
+                            System.out.println("Salvataggio del file: " + file.getName());
+                        }
+                    }
+                }
+                String path=fileChooser.getSelectedFile().getAbsolutePath();
+                if(path.contains(".bin"))
+                    path=fileChooser.getSelectedFile().getAbsolutePath();
+                else
+                    path=fileChooser.getSelectedFile().getAbsolutePath()+".bin";
                 try{
-                    ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream("projects/First_drawing.bin"));
+                    ObjectOutputStream stream = new ObjectOutputStream(new FileOutputStream(path));
                     stream.writeObject(JPDraw.getCirclesList());
                     stream.writeObject(JPDraw.getRectanglesList());
                     stream.writeObject(JPDraw.getSegmentsList());
@@ -110,9 +128,21 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 }
                 break;
             case "load":
+                JFileChooser fileChooser1 = new JFileChooser();
+                fileChooser1.setDialogTitle("Scegli un file da caricare");
+                fileChooser1.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                fileChooser1.setMultiSelectionEnabled(false);
+
+                int returnValue = fileChooser1.showOpenDialog(null);
+                String path1;
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    path1 = fileChooser1.getSelectedFile().getAbsolutePath();
+                } else {
+                    path1="";
+                }
                 ObjectInputStream stream = null;
                 try {
-                    stream = new ObjectInputStream(new FileInputStream("projects/First_drawing.bin"));
+                    stream = new ObjectInputStream(new FileInputStream(path1));
                     JPDraw.setCirclesList((ArrayList<Cerchio>) stream.readObject());
                     JPDraw.setRectanglesList((ArrayList<Rettangolo>) stream.readObject());
                     JPDraw.setSegmentsList((ArrayList<Segmento>) stream.readObject());
