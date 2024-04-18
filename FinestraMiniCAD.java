@@ -103,13 +103,6 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 int value = fileChooser.showSaveDialog(null);
                 if (value == JFileChooser.APPROVE_OPTION) {
                     File[] selectedFiles = fileChooser.getSelectedFiles();
-                    for (File file : selectedFiles) {
-                        if (file.exists()) {
-                            System.out.println("Il file " + file.getName() + " è già presente. Non è stato salvato nuovamente.");
-                        } else {
-                            System.out.println("Salvataggio del file: " + file.getName());
-                        }
-                    }
                 }
                 String path=fileChooser.getSelectedFile().getAbsolutePath();
                 if(path.contains(".bin"))
@@ -129,17 +122,21 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 break;
             case "load":
                 JFileChooser fileChooser1 = new JFileChooser();
-                fileChooser1.setDialogTitle("Scegli un file da caricare");
+                fileChooser1.setDialogTitle("Seleziona il progetto da caricare");
                 fileChooser1.setFileSelectionMode(JFileChooser.FILES_ONLY);
                 fileChooser1.setMultiSelectionEnabled(false);
 
                 int returnValue = fileChooser1.showOpenDialog(null);
-                String path1;
-                if (returnValue == JFileChooser.APPROVE_OPTION) {
-                    path1 = fileChooser1.getSelectedFile().getAbsolutePath();
-                } else {
-                    path1="";
+                String path1="";
+                if (returnValue == JFileChooser.APPROVE_OPTION)
+                {
+                    if(fileChooser1.getSelectedFile().getAbsolutePath().contains(".bin"))
+                        path1 = fileChooser1.getSelectedFile().getAbsolutePath();
+                    else
+                        JOptionPane.showMessageDialog(null, "Errore: Il file selezionato non ha come estenzione .bin", "Errore!", JOptionPane.ERROR_MESSAGE);
                 }
+                else
+                    path1=null;
                 ObjectInputStream stream = null;
                 try {
                     stream = new ObjectInputStream(new FileInputStream(path1));
@@ -150,17 +147,29 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                     JPDraw.repaint();
                     stream.close();
                 } catch (IOException ex) {
-                    System.err.println("Errore durante il caricamento del file: " + ex.getMessage());
+                    JOptionPane.showMessageDialog(null, "Errore durante il caricamento del file!", "Errore!", JOptionPane.ERROR_MESSAGE);
                 } catch (ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }
                 break;
             case "del":
-                File file = new File("projects/First_drawing.bin");
-                if (file.exists())
-                    file.delete();
-                else
-                    System.err.println("Nessun file presente!");
+                JFileChooser fileChooser2 = new JFileChooser();
+                int value2 = fileChooser2.showOpenDialog(null);
+
+                if (value2 == JFileChooser.APPROVE_OPTION) {
+                    File selectedFile = fileChooser2.getSelectedFile();
+
+                    int deleteOption = JOptionPane.showConfirmDialog(null, "Sei sicuro di voler eliminare il file?", "Elimina file", JOptionPane.YES_NO_OPTION);
+
+                    if (deleteOption == JOptionPane.YES_OPTION) {
+                        if (selectedFile.delete()) {
+                            JOptionPane.showMessageDialog(null, "File eliminato con successo!", "Eliminazione completata!", JOptionPane.INFORMATION_MESSAGE);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Errore durante l'eliminazione del file!", "Errore!", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+                break;
             default:
 
                 break;
