@@ -80,7 +80,32 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void setThickness(int thickness)
     {
-        this.thickness=thickness;
+        if(!(selectedLine || selectedRectangle || selectedCircle))
+        {
+            this.thickness=thickness;
+        }
+
+        if(selectedLine)
+        {
+            resetSelected();
+            segmentsList.get(indexOfLine).setThickness(thickness);
+            repaint();
+            color=Color.BLACK;
+        }
+
+        if(selectedCircle)
+        {
+            resetSelected();
+            circlesList.get(indexOfCircle).setThickness(thickness);
+            repaint();
+        }
+
+        if(selectedRectangle)
+        {
+            resetSelected();
+            rectanglesList.get(indexOfRectangle).setThickness(thickness);
+            repaint();
+        }
     }
 
     public ArrayList<Cerchio> getCirclesList() {return circlesList;}
@@ -144,7 +169,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     }
     public void setColor(Color color)
     {
-        if(!(selectedLine && selectedRectangle && selectedCircle))
+        if(!(selectedLine || selectedRectangle || selectedCircle))
         {
             this.color=color;
         }
