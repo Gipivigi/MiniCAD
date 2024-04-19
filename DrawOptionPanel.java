@@ -10,6 +10,7 @@ public class DrawOptionPanel extends JPanel
 
     public DrawOptionPanel()
     {
+        setLayout(new GridLayout(15,1));
         Icon th1=new ImageIcon("./images/thickness/stroke1.png");
         JBThickness1=new JButton(th1);
         JBThickness1.setActionCommand("thickness_1");
@@ -35,6 +36,7 @@ public class DrawOptionPanel extends JPanel
         add(JBThickness3);
         add(JBThickness4);
         add(JBThickness5);
+        for(int i=0; i<10; i++){new JPanel();};
     }
 
 

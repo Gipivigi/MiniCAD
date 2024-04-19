@@ -11,9 +11,11 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     DrawPanel JPDraw;
     DrawOptionPanel JPOption;
     SidePanel JPSidePanel;
+    LowerPanel JPLower;
     Container contents;
     Color selectedColor;
     boolean line=false, circle=false, rectangle=false, point=false;
+    boolean showLines = false;
     public FinestraMiniCAD()
     {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -24,12 +26,14 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPDraw=new DrawPanel();
         JPOption= new DrawOptionPanel();
         JPSidePanel=new SidePanel();
+        JPLower=new LowerPanel();
         contents=getContentPane();
         contents.setLayout(new BorderLayout());
         contents.add(JPCommand, BorderLayout.NORTH);
         contents.add(JPDraw, BorderLayout.CENTER);
-        contents.add(JPOption, BorderLayout.SOUTH);
+        contents.add(JPOption, BorderLayout.EAST);
         contents.add(JPSidePanel, BorderLayout.WEST);
+        contents.add(JPLower, BorderLayout.SOUTH);
         JPCommand.JBCursor.addActionListener(this);
         JPCommand.JBline.addActionListener(this);
         JPCommand.JBcircle.addActionListener(this);
@@ -45,7 +49,36 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPSidePanel.JBSave.addActionListener(this);
         JPSidePanel.JBLoad.addActionListener(this);
         JPSidePanel.JBDel.addActionListener(this);
+        JPLower.JCheck.addActionListener(this);
+
         setVisible(true);
+    }
+    public void paint(Graphics g)
+    {
+        super.paint(g);
+
+        // Set the color for the lines
+        g.setColor(Color.BLUE);
+
+        // Draw lines using drawLine method: (x1, y1, x2, y2)
+        g.drawLine(50, 50, 150, 100);
+        g.drawLine(150, 100, 250, 200);
+        g.drawLine(50, 150, 250, 150);
+    }
+    public void paint1(Graphics g)
+    {
+        super.paint(g);
+
+        // Set the color for the lines
+        if(showLines)
+        {
+            g.setColor(Color.BLUE);
+
+            // Draw lines using drawLine method: (x1, y1, x2, y2)
+            g.drawLine(50, 50, 150, 100);
+            g.drawLine(150, 100, 250, 200);
+            g.drawLine(50, 150, 250, 150);
+        }
     }
 
     @Override
@@ -170,9 +203,14 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                     }
                 }
                 break;
+            case "Mostra griglia":
+                showLines = JPLower.JCheck.isSelected();
+                repaint();
+                break;
             default:
 
                 break;
         }
     }
+
 }
