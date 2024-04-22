@@ -187,6 +187,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 break;
             case "del":
                 JFileChooser fileChooser2 = new JFileChooser();
+                fileChooser2.setDialogTitle("Seleziona il progetto da eliminare");
                 int value2 = fileChooser2.showOpenDialog(null);
 
                 if (value2 == JFileChooser.APPROVE_OPTION) {
