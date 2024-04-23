@@ -14,7 +14,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     Boolean drawing=false, lastRectangle=false, lastCircle=false;
     Boolean selectedLine=false, selectedCircle=false, selectedRectangle=false, lastDelete=false;
     int indexOfLine, indexOfCircle, indexOfRectangle;
-
+    Boolean grid=false;
+    int numRighe=50, numColonne=50, width, height, xRec=0, yRec=0;
 
     int x1=0, y1=0, x2=0, y2=0;
 
@@ -23,11 +24,30 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
     }
-
+    public void setGrid(Boolean grid)
+    {
+        this.grid=grid;}
     public void paintComponent(Graphics g)
     {
+        width=(getWidth()/numColonne);
+        height=(getHeight()/numRighe);
         Graphics2D g2d=(Graphics2D) g;
         super.paintComponent(g2d);
+        if(grid)
+        {
+            g2d.setColor(Color.BLACK);
+            for(int i=0; i<numRighe; i++)
+            {
+                for(int j=0; j<numColonne; j++)
+                {
+                    xRec = j * width;
+                    yRec = i * height;
+                    g2d.drawRect(xRec, yRec, width, height);
+                }
+            }
+            repaint();
+        }
+
 
         for(int i=0; i<segmentsList.size(); i++)
         {

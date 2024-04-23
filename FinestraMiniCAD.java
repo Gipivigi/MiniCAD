@@ -53,18 +53,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
 
         setVisible(true);
     }
-    public void paint(Graphics g)
-    {
-        super.paint(g);
 
-        // Set the color for the lines
-        g.setColor(Color.BLUE);
-
-        // Draw lines using drawLine method: (x1, y1, x2, y2)
-        g.drawLine(50, 50, 150, 100);
-        g.drawLine(150, 100, 250, 200);
-        g.drawLine(50, 150, 250, 150);
-    }
     public void paint1(Graphics g)
     {
         super.paint(g);
@@ -205,7 +194,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 }
                 break;
             case "Mostra griglia":
-                showLines = JPLower.JCheck.isSelected();
+                JPDraw.setGrid(JPLower.JCheck.isSelected());
                 repaint();
                 break;
             default:
