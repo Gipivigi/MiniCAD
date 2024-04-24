@@ -14,7 +14,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     LowerPanel JPLower;
     Container contents;
     Color selectedColor;
-    boolean line=false, circle=false, rectangle=false, point=false, fillStat=false;
+    boolean fillStat=false;
     boolean showLines = false;
     public FinestraMiniCAD()
     {
