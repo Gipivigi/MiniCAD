@@ -8,14 +8,18 @@ public class Rettangolo implements Serializable
     Punto puntoIniziale;
     Color c;
     int thickness;
-    public Rettangolo(int width, int height, Punto puntoIniziale, Color c, int thickness)
+    boolean fill;
+    public Rettangolo(int width, int height, Punto puntoIniziale, Color c, int thickness, boolean fill)
     {
+
+        this.fill=fill;
         this.width=width;
         this.height=height;
         this.puntoIniziale=puntoIniziale;
         this.c=c;
         this.thickness=thickness;
     }
+
 
     public Rettangolo(Rettangolo r)
     {
@@ -24,6 +28,15 @@ public class Rettangolo implements Serializable
         this.puntoIniziale=r.getPuntoIniziale();
         this.c=r.getC();
         this.thickness=r.getThickness();
+        this.fill=r.getFill();
+    }
+    public boolean getFill()
+    {
+        return fill;
+    }
+    public void setFill(boolean fill)
+    {
+        this.fill=fill;
     }
     public int getWidth()
     {
