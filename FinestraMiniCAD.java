@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class FinestraMiniCAD extends JFrame implements ActionListener
 {
@@ -15,6 +14,8 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     LowerPanel JPLower;
     Container contents;
     Color selectedColor;
+    boolean fillStat=false;
+    boolean showLines = false;
     public FinestraMiniCAD()
     {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -40,6 +41,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPCommand.JBpoint.addActionListener(this);
         JPCommand.JBselectColor.addActionListener(this);
         JPCommand.JBDelSelected.addActionListener(this);
+        JPCommand.JBFill.addActionListener(this);
         JPOption.JBThickness1.addActionListener(this);
         JPOption.JBThickness2.addActionListener(this);
         JPOption.JBThickness3.addActionListener(this);
@@ -49,8 +51,24 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPSidePanel.JBLoad.addActionListener(this);
         JPSidePanel.JBDel.addActionListener(this);
         JPLower.JCheck.addActionListener(this);
-        JPLower.JMenu.addActionListener(this);
+
         setVisible(true);
+    }
+
+    public void paint1(Graphics g)
+    {
+        super.paint(g);
+
+        // Set the color for the lines
+        if(showLines)
+        {
+            g.setColor(Color.BLUE);
+
+            // Draw lines using drawLine method: (x1, y1, x2, y2)
+            g.drawLine(50, 50, 150, 100);
+            g.drawLine(150, 100, 250, 200);
+            g.drawLine(50, 150, 250, 150);
+        }
     }
 
     @Override
@@ -79,6 +97,19 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
             case "point":
                 JPDraw.resetSelected();
                 JPDraw.setFigure(4);
+                break;
+            case "fill":
+                if(fillStat)
+                {
+                    JPCommand.setFillAction(false);
+                    fillStat=false;
+                }
+                else
+                {
+                    JPCommand.setFillAction(true);
+                    fillStat=true;
+                }
+                JPDraw.setFill(fillStat);
                 break;
             case"thickness_1":
                 JPDraw.setThickness(1);
@@ -179,38 +210,6 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
             case "Mostra griglia":
                 JPDraw.setGrid(JPLower.JCheck.isSelected());
                 repaint();
-                break;
-            case "backgroundColor":
-                if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Default"))
-                {
-                    JPDraw.setBackground(Color.WHITE);
-                    JPDraw.setColor(Color.BLACK);
-                }
-                if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Nero"))
-                {
-                    JPDraw.setBackground(Color.BLACK);
-                    JPDraw.setColor(Color.WHITE);
-                }
-                if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Blu"))
-                {
-                    JPDraw.setBackground(Color.BLUE);
-                    JPDraw.setColor(Color.BLACK);
-                }
-                if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Grigio"))
-                {
-                    JPDraw.setBackground(Color.GRAY);
-                    JPDraw.setColor(Color.BLACK);
-                }
-                if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Ciano"))
-                {
-                    JPDraw.setBackground(Color.CYAN);
-                    JPDraw.setColor(Color.BLACK);
-                }
-                if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Verde"))
-                {
-                    JPDraw.setBackground(Color.GREEN);
-                    JPDraw.setColor(Color.BLACK);
-                }
                 break;
             default:
 
