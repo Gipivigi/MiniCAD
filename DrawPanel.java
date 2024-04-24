@@ -15,7 +15,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     Boolean selectedLine=false, selectedCircle=false, selectedRectangle=false, lastDelete=false;
     int indexOfLine, indexOfCircle, indexOfRectangle;
     Boolean grid=false, fill=false;
-    int numRighe=50, numColonne=50, width, height, xRec=0, yRec=0;
+    int numRighe=40, numColonne=40, width, height, xRec=0, yRec=0;
 
     int x1=0, y1=0, x2=0, y2=0;
 
