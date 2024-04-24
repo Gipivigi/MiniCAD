@@ -14,7 +14,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     LowerPanel JPLower;
     Container contents;
     Color selectedColor;
-    boolean line=false, circle=false, rectangle=false, point=false;
+    boolean line=false, circle=false, rectangle=false, point=false, fillStat=false;
     boolean showLines = false;
     public FinestraMiniCAD()
     {
@@ -41,6 +41,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPCommand.JBpoint.addActionListener(this);
         JPCommand.JBselectColor.addActionListener(this);
         JPCommand.JBDelSelected.addActionListener(this);
+        JPCommand.JBFill.addActionListener(this);
         JPOption.JBThickness1.addActionListener(this);
         JPOption.JBThickness2.addActionListener(this);
         JPOption.JBThickness3.addActionListener(this);
@@ -96,6 +97,19 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
             case "point":
                 JPDraw.resetSelected();
                 JPDraw.setFigure(4);
+                break;
+            case "fill":
+                if(fillStat)
+                {
+                    JPCommand.setFillAction(false);
+                    fillStat=false;
+                }
+                else
+                {
+                    JPCommand.setFillAction(true);
+                    fillStat=true;
+                }
+                JPDraw.setFill(fillStat);
                 break;
             case"thickness_1":
                 JPDraw.setThickness(1);

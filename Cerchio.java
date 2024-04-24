@@ -8,13 +8,19 @@ public class Cerchio implements Serializable
     Punto puntoIniziale;
     int thickness;
     Color c;
-    public Cerchio(int width, int height, Punto puntoIniziale, Color c, int thickness)
+    boolean fill;
+    public Cerchio(int width, int height, Punto puntoIniziale, Color c, int thickness, boolean fill)
     {
         this.width=width;
         this.height=height;
         this.puntoIniziale=puntoIniziale;
         this.c=c;
         this.thickness=thickness;
+        this.fill=fill;
+    }
+    public boolean getFill()
+    {
+        return fill;
     }
     public Cerchio(Cerchio c)
     {
@@ -23,6 +29,7 @@ public class Cerchio implements Serializable
         this.puntoIniziale=c.getPuntoIniziale();
         this.c=c.getC();
         this.thickness=c.getThickness();
+        this.fill=c.getFill();
     }
     public int getWidth()
     {

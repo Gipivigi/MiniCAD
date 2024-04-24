@@ -12,8 +12,11 @@ public class CommandPanel extends JPanel
     JButton JBselectColor;
     JButton JBCursor;
     JButton JBDelSelected;
+    JButton JBFill;
 
 
+    Icon fillOn=new ImageIcon("./images/icons/fill-on.bmp");
+    Icon fillOff=new ImageIcon("./images/icons/fill-off.png");
 
     public CommandPanel()
     {
@@ -38,6 +41,8 @@ public class CommandPanel extends JPanel
         Icon delete=new ImageIcon("./images/icons/delete-icon.png");
         JBDelSelected=new JButton(delete);
         JBDelSelected.setActionCommand("DeleteFigure");
+        JBFill=new JButton(fillOff);
+        JBFill.setActionCommand("fill");
         JBCursor.setPreferredSize(new Dimension(cursor.getIconWidth(), cursor.getIconHeight()));
         JBline.setPreferredSize(new Dimension(line.getIconWidth(), line.getIconHeight()));
         JBrectangle.setPreferredSize(new Dimension(rectangle.getIconWidth(), rectangle.getIconHeight()));
@@ -45,6 +50,7 @@ public class CommandPanel extends JPanel
         JBpoint.setPreferredSize(new Dimension(point.getIconWidth(), point.getIconHeight()));
         JBselectColor.setPreferredSize(new Dimension(selectColor.getIconWidth(),selectColor.getIconHeight()));
         JBDelSelected.setPreferredSize(new Dimension(delete.getIconWidth(),delete.getIconHeight()));
+        JBFill.setPreferredSize(new Dimension(fillOn.getIconWidth(),fillOn.getIconHeight()));
         add(JBCursor);
         add(JBline);
         add(JBrectangle);
@@ -52,6 +58,19 @@ public class CommandPanel extends JPanel
         add(JBpoint);
         add(JBselectColor);
         add(JBDelSelected);
+        add(JBFill);
+    }
+
+    public void setFillAction(boolean status)
+    {
+        if(status)
+        {
+            JBFill.setIcon(fillOn);
+        }
+        else
+        {
+            JBFill.setIcon(fillOff);
+        }
     }
 
 }
