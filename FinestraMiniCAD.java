@@ -15,6 +15,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     LowerPanel JPLower;
     Container contents;
     Color selectedColor;
+    boolean fillStat=false;
     public FinestraMiniCAD()
     {
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -40,6 +41,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPCommand.JBpoint.addActionListener(this);
         JPCommand.JBselectColor.addActionListener(this);
         JPCommand.JBDelSelected.addActionListener(this);
+        JPCommand.JBFill.addActionListener(this);
         JPOption.JBThickness1.addActionListener(this);
         JPOption.JBThickness2.addActionListener(this);
         JPOption.JBThickness3.addActionListener(this);
@@ -101,6 +103,19 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
             case "selectColor":
                 selectedColor = JColorChooser.showDialog(null, "Seleziona un colore", Color.BLACK);
                 JPDraw.setColor(selectedColor);
+                break;
+            case "fill":
+                if(fillStat)
+                {
+                    JPCommand.setFillAction(false);
+                    fillStat=false;
+                }
+                else
+                {
+                    JPCommand.setFillAction(true);
+                    fillStat=true;
+                }
+                JPDraw.setFill(fillStat);
                 break;
             case "save":
                 JFileChooser fileChooser = new JFileChooser();
