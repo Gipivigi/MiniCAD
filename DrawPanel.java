@@ -300,7 +300,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                         break;
                     case 2:
                         rectanglesList.add(new Rettangolo(0,0,new Punto(x1,y1,color,0),color, thickness, fill));
-                        System.out.println(fill);
                         drawing=true;
                         break;
                     case 3:
