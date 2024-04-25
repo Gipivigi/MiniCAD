@@ -200,31 +200,37 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 {
                     JPDraw.setBackground(Color.WHITE);
                     JPDraw.setColor(Color.BLACK);
+                    JPDraw.setGridColor(Color.BLACK);
                 }
                 if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Nero"))
                 {
                     JPDraw.setBackground(Color.BLACK);
                     JPDraw.setColor(Color.WHITE);
+                    JPDraw.setGridColor(Color.WHITE);
                 }
                 if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Blu"))
                 {
                     JPDraw.setBackground(Color.BLUE);
                     JPDraw.setColor(Color.BLACK);
+                    JPDraw.setGridColor(Color.BLACK);
                 }
                 if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Grigio"))
                 {
                     JPDraw.setBackground(Color.GRAY);
                     JPDraw.setColor(Color.BLACK);
+                    JPDraw.setGridColor(Color.WHITE);
                 }
                 if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Ciano"))
                 {
                     JPDraw.setBackground(Color.CYAN);
                     JPDraw.setColor(Color.BLACK);
+                    JPDraw.setGridColor(Color.BLACK);
                 }
                 if(Objects.equals(JPLower.JMenu.getSelectedItem(), "Verde"))
                 {
                     JPDraw.setBackground(Color.GREEN);
                     JPDraw.setColor(Color.BLACK);
+                    JPDraw.setGridColor(Color.BLACK);
                 }
                 break;
             default:
@@ -232,5 +238,4 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 break;
         }
     }
-
 }

@@ -15,7 +15,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     Boolean selectedLine=false, selectedCircle=false, selectedRectangle=false, lastDelete=false;
     int indexOfLine, indexOfCircle, indexOfRectangle;
     Boolean grid=false, fill=false;
-    int numRighe=40, numColonne=40, width, height, xRec=0, yRec=0;
+    Color gridColor=Color.black;
 
     int x1=0, y1=0, x2=0, y2=0;
 
@@ -23,27 +23,22 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     {
         this.addMouseListener(this);
         this.addMouseMotionListener(this);
+        setBackground(Color.WHITE);
     }
-    public void setGrid(Boolean grid)
-    {
-        this.grid=grid;}
+    public void setGrid(Boolean grid) {this.grid=grid;}
+    public void setGridColor(Color gridColor) {this.gridColor=gridColor;}
     public void paintComponent(Graphics g)
     {
-        width=(getWidth()/numColonne);
-        height=(getHeight()/numRighe);
         Graphics2D g2d=(Graphics2D) g;
         super.paintComponent(g2d);
         if(grid)
         {
-            g2d.setColor(Color.BLACK);
-            for(int i=0; i<numRighe; i++)
-            {
-                for(int j=0; j<numColonne; j++)
-                {
-                    xRec = j * width;
-                    yRec = i * height;
-                    g2d.drawRect(xRec, yRec, width, height);
-                }
+            g2d.setColor(gridColor);
+            for (int i = 0; i < getWidth(); i += 10) {
+                g2d.drawLine(i, 0, i, getHeight());
+            }
+            for (int i = 0; i < getHeight(); i += 10) {
+                g2d.drawLine(0, i, getWidth(), i);
             }
             repaint();
         }
