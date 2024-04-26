@@ -52,6 +52,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPSidePanel.JBDel.addActionListener(this);
         JPLower.JCheck.addActionListener(this);
         JPLower.JMenu.addActionListener(this);
+        JPCommand.JBTextBox.addActionListener(this);
         setVisible(true);
     }
 
@@ -233,6 +234,8 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                     JPDraw.setGridColor(Color.BLACK);
                 }
                 break;
+            case "text":
+                System.out.println("ciao");
             default:
 
                 break;
