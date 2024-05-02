@@ -43,7 +43,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             repaint();
         }
 
-
         for(int i=0; i<segmentsList.size(); i++)
         {
             Segmento s=new Segmento(segmentsList.get(i));
@@ -150,13 +149,15 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             double ys1=s.getPuntoFinale().getY();
             double m=(ys1-ys0)/(xs1-xs0);
             double q=ys0-m*xs0;
-            if (Math.abs(y1-(m*x1+q))<=2)
+            if (Math.abs(y1-(m*x1+q))<=4)
             {
-                lastColor=segmentsList.get(i).getC();
-                segmentsList.get(i).setC(Color.CYAN);
-                selectedLine=true;
-                indexOfLine=i;
-                break;
+                if((x1>xs0 && y1>ys0 && x1<xs1 && y1<ys1) || (x1<xs0 && y1<ys0 && x1>xs1 && y1>ys1)) {
+                    lastColor = segmentsList.get(i).getC();
+                    segmentsList.get(i).setC(Color.CYAN);
+                    selectedLine = true;
+                    indexOfLine = i;
+                    break;
+                }
             }
         }
         for (int i=0; i<circlesList.size(); i++)
