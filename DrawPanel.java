@@ -12,8 +12,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     int figure=0, thickness= 1, xRect=0, yRect=0, xCirc=0, yCirc=0;
     Color color=Color.black, lastColor;
     Boolean drawing=false, lastRectangle=false, lastCircle=false;
-    Boolean selectedLine=false, selectedCircle=false, selectedRectangle=false, lastDelete=false;
-    int indexOfLine, indexOfCircle, indexOfRectangle;
+    Boolean selectedLine=false, selectedCircle=false, selectedRectangle=false, lastDelete=false, selectedPoint=false;
+    int indexOfLine, indexOfCircle, indexOfRectangle, indexOfPoint;
     Boolean grid=false, fill=false;
     Color gridColor=Color.black;
 
@@ -88,7 +88,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         {
             Punto p=new Punto(pointsList.get(i));
             g2d.setColor(p.getColor());
-            g2d.fillOval(p.getX(), p.getY(), 10,10);
+            g2d.fillOval(p.getX(), p.getY(), p.getThickness(),p.getThickness());
         }
 
     }
@@ -100,7 +100,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
 
     public void setThickness(int thickness)
     {
-        if(!(selectedLine || selectedRectangle || selectedCircle))
+        if(!(selectedLine || selectedRectangle || selectedCircle || selectedPoint))
         {
             this.thickness=thickness;
         }
@@ -126,6 +126,12 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             rectanglesList.get(indexOfRectangle).setThickness(thickness);
             repaint();
         }
+        if(selectedPoint)
+        {
+            resetSelected();
+            pointsList.get(indexOfPoint).setThickness(thickness*2);
+            repaint();
+        }
     }
 
     public ArrayList<Cerchio> getCirclesList() {return circlesList;}
@@ -141,7 +147,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     {
         for(int i=0; i<segmentsList.size(); i++)
         {
-            if(selectedLine || selectedRectangle || selectedCircle) break;
+            if(selectedLine || selectedRectangle || selectedCircle || selectedPoint) break;
             Segmento s=new Segmento(segmentsList.get(i));
             double xs0=s.getPuntoIniziale().getX();
             double ys0=s.getPuntoIniziale().getY();
@@ -162,7 +168,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         for (int i=0; i<circlesList.size(); i++)
         {
-            if(selectedLine || selectedRectangle || selectedCircle) break;
+            if(selectedLine || selectedRectangle || selectedCircle || selectedPoint) break;
             Cerchio c=new Cerchio(circlesList.get(i));
             int ovalCenterX=c.getPuntoIniziale().getX()+c.getWidth()/2;
             int ovalCenterY=c.getPuntoIniziale().getY()+c.getHeight()/2;
@@ -178,7 +184,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         }
         for (int i=0; i<rectanglesList.size(); i++)
         {
-            if(selectedLine || selectedRectangle || selectedCircle) break;
+            if(selectedLine || selectedRectangle || selectedCircle || selectedPoint) break;
             Rettangolo r=new Rettangolo(rectanglesList.get(i));
             int originPointX=r.getPuntoIniziale().getX();
             int originPointY=r.getPuntoIniziale().getY();
@@ -193,6 +199,22 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 break;
             }
         }
+        for (int i=0; i<pointsList.size(); i++)
+        {
+            if(selectedLine || selectedRectangle || selectedCircle || selectedPoint) break;
+            Punto p=new Punto(pointsList.get(i));
+            int ovalCenterX=p.getX()+p.getThickness()/2;
+            int ovalCenterY=p.getY()+p.getThickness()/2;
+            int radius=(int)Math.sqrt(p.getThickness()*p.getThickness()/4.0+p.getThickness()*p.getThickness()/4.0);
+            if (x1>=ovalCenterX-radius && x1<=ovalCenterX+radius && y1>=ovalCenterY-radius && y1<=ovalCenterY+radius)
+            {
+                lastColor=pointsList.get(i).getColor();
+                selectedPoint=true;
+                indexOfPoint=i;
+                pointsList.get(i).setColor(Color.cyan);
+                break;
+            }
+        }
         repaint();
     }
     public void setFill(boolean f)
@@ -201,7 +223,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     }
     public void setColor(Color color)
     {
-        if(!(selectedLine || selectedRectangle || selectedCircle))
+        if(!(selectedLine || selectedRectangle || selectedCircle || selectedPoint ))
         {
             this.color=color;
         }
@@ -227,6 +249,13 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             rectanglesList.get(indexOfRectangle).setC(color);
             repaint();
         }
+
+        if(selectedPoint)
+        {
+            resetSelected();
+            pointsList.get(indexOfPoint).setColor(color);
+            repaint();
+        }
     }
 
     public void deleteFigure()
@@ -246,6 +275,11 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
             rectanglesList.remove(indexOfRectangle);
             lastDelete=true;
         }
+        if(selectedPoint)
+        {
+            pointsList.remove(indexOfPoint);
+            lastDelete=true;
+        }
         resetSelected();
         repaint();
     }
@@ -254,16 +288,23 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     {
         if(!(lastDelete))
         {
-            if (selectedLine && segmentsList.get(indexOfLine) != null) {
+            if (selectedLine && segmentsList.get(indexOfLine)!=null)
+            {
                 segmentsList.get(indexOfLine).setC(lastColor);
             }
 
-            if (selectedCircle && circlesList.get(indexOfCircle) != null) {
+            if (selectedCircle && circlesList.get(indexOfCircle)!=null)
+            {
                 circlesList.get(indexOfCircle).setC(lastColor);
             }
 
-            if (selectedRectangle && rectanglesList.get(indexOfRectangle) != null) {
+            if (selectedRectangle && rectanglesList.get(indexOfRectangle)!=null)
+            {
                 rectanglesList.get(indexOfRectangle).setC(lastColor);
+            }
+            if(selectedPoint && pointsList.get(indexOfPoint)!=null)
+            {
+                pointsList.get(indexOfPoint).setColor(lastColor);
             }
         }
         else
@@ -273,6 +314,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         selectedLine=false;
         selectedCircle=false;
         selectedRectangle=false;
+        selectedPoint=false;
         repaint();
     }
 
@@ -308,7 +350,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                         drawing=true;
                         break;
                     case 4:
-                        pointsList.add(new Punto(x1-5,y1-5,color, thickness));
+                        pointsList.add(new Punto(x1-thickness,y1-thickness,color, thickness*2));
                         break;
                     default:
                         break;
