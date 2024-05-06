@@ -18,6 +18,11 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     boolean fillStat=false;
     public FinestraMiniCAD()
     {
+        setSize(900,600);
+        setLocationRelativeTo(null);
+        setTitle("MiniCAD");
+        ImageIcon IconaFinestra=new ImageIcon("./images/m.png");
+        setIconImage(IconaFinestra.getImage());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(true);
