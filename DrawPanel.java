@@ -16,7 +16,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     int indexOfLine, indexOfCircle, indexOfRectangle, indexOfPoint;
     Boolean grid=false, fill=false;
     Color gridColor=Color.black;
-
+    String JText="";
     int x1=0, y1=0, x2=0, y2=0;
 
     public DrawPanel()
@@ -27,10 +27,15 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     }
     public void setGrid(Boolean grid) {this.grid=grid;}
     public void setGridColor(Color gridColor) {this.gridColor=gridColor;}
+    public void setText(String JText){this.JText=JText;}
+    public String getText(){return JText;}
     public void paintComponent(Graphics g)
     {
         Graphics2D g2d=(Graphics2D) g;
         super.paintComponent(g2d);
+
+        g2d.drawString(getText(),50,50);
+
         if(grid)
         {
             g2d.setColor(gridColor);
@@ -289,6 +294,11 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         repaint();
     }
 
+    public void addJText(int numClicchi)
+    {
+
+    }
+
     public void resetSelected()
     {
         if(!(lastDelete))
@@ -403,10 +413,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     public void mouseExited(MouseEvent e){}
     public void mousePressed(MouseEvent e){}
     public void mouseReleased(MouseEvent e){}
-    public void mouseDragged(MouseEvent e)
-    {
-
-    }
+    public void mouseDragged(MouseEvent e){}
     @Override
     public void mouseMoved(MouseEvent e)
     {

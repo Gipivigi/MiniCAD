@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -240,7 +242,24 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 }
                 break;
             case "text":
-                System.out.println("ciao");
+                JTextField jTextField = new JTextField();
+                jTextField.setBounds((JPDraw.getWidth()/2)-100, (JPDraw.getHeight()/2-100), 200, 50);
+                jTextField.addKeyListener(new KeyAdapter() {
+                    @Override
+                    public void keyPressed(KeyEvent e)
+                    {
+                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                            String testo = jTextField.getText();
+                            JPDraw.setText(testo);
+                            JPDraw.remove(jTextField);
+                            repaint();
+                        }
+                    }
+                });
+                JPDraw.add(jTextField);
+                jTextField.requestFocusInWindow(); // Permette alla casella di testo di ricevere il focus
+                repaint();
+                break;
             default:
 
                 break;
