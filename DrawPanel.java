@@ -294,10 +294,6 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
         repaint();
     }
 
-    public void addJText(int numClicchi)
-    {
-
-    }
 
     public void resetSelected()
     {

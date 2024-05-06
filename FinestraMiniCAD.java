@@ -67,7 +67,6 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         String command=e.getActionCommand();
-        //System.out.println(command);
         switch(command)
         {
             case "cursor":
