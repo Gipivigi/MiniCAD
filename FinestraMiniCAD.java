@@ -23,7 +23,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         setSize(900,600);
         setLocationRelativeTo(null);
         setTitle("MiniCAD");
-        ImageIcon IconaFinestra=new ImageIcon("./images/m.png");
+        ImageIcon IconaFinestra=new ImageIcon("./res/images/m.png");
         setIconImage(IconaFinestra.getImage());
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

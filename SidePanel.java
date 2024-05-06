@@ -9,13 +9,13 @@ public class SidePanel extends JPanel
     public SidePanel()
     {
         setLayout(new GridLayout(15,1));
-        Icon save = new ImageIcon("./images/icons/save_file.png");
+        Icon save = new ImageIcon("./res/images/icons/save_file.png");
         JBSave = new JButton(save);
         JBSave.setActionCommand("save");
-        Icon load = new ImageIcon("./images/icons/load_file.png");
+        Icon load = new ImageIcon("./res/images/icons/load_file.png");
         JBLoad = new JButton(load);
         JBLoad.setActionCommand("load");
-        Icon del = new ImageIcon("./images/icons/trash.png");
+        Icon del = new ImageIcon("./res/images/icons/trash.png");
         JBDel = new JButton(del);
         JBDel.setActionCommand("del");
         JBSave.setPreferredSize(new Dimension(save.getIconWidth(), save.getIconHeight()));

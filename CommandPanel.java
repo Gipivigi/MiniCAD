@@ -13,35 +13,35 @@ public class CommandPanel extends JPanel
     JButton JBFill;
     JButton JBTextBox;
 
-    Icon fillOn=new ImageIcon("./images/icons/fill-on.bmp");
-    Icon fillOff=new ImageIcon("./images/icons/fill-off.png");
+    Icon fillOn=new ImageIcon("./res/images/icons/fill-on.bmp");
+    Icon fillOff=new ImageIcon("./res/images/icons/fill-off.png");
 
     public CommandPanel()
     {
-        Icon cursor=new ImageIcon("./images/icons/hand-cmd.bmp");
+        Icon cursor=new ImageIcon("./res/images/icons/hand-cmd.bmp");
         JBCursor=new JButton(cursor);
         JBCursor.setActionCommand("cursor");
-        Icon line=new ImageIcon("./images/icons/line-cmd.bmp");
+        Icon line=new ImageIcon("./res/images/icons/line-cmd.bmp");
         JBline=new JButton(line);
         JBline.setActionCommand("line");
-        Icon rectangle=new ImageIcon("./images/icons/rect-cmd.bmp");
+        Icon rectangle=new ImageIcon("./res/images/icons/rect-cmd.bmp");
         JBrectangle=new JButton(rectangle);
         JBrectangle.setActionCommand("rectangle");
-        Icon circle=new ImageIcon("./images/icons/center-rad-cmd.bmp");
+        Icon circle=new ImageIcon("./res/images/icons/center-rad-cmd.bmp");
         JBcircle=new JButton(circle);
         JBcircle.setActionCommand("circle");
-        Icon point=new ImageIcon("./images/icons/point-cmd.bmp");
+        Icon point=new ImageIcon("./res/images/icons/point-cmd.bmp");
         JBpoint=new JButton(point);
         JBpoint.setActionCommand("point");
-        Icon selectColor=new ImageIcon("./images/icons/color.png");
+        Icon selectColor=new ImageIcon("./res/images/icons/color.png");
         JBselectColor=new JButton(selectColor);
         JBselectColor.setActionCommand("selectColor");
-        Icon delete=new ImageIcon("./images/icons/delete-icon.png");
+        Icon delete=new ImageIcon("./res/images/icons/delete-icon.png");
         JBDelSelected=new JButton(delete);
         JBDelSelected.setActionCommand("DeleteFigure");
         JBFill=new JButton(fillOff);
         JBFill.setActionCommand("fill");
-        Icon textBox=new ImageIcon("./images/icons/textBox.png");
+        Icon textBox=new ImageIcon("./res/images/icons/textBox.png");
         JBTextBox=new JButton(textBox);
         JBTextBox.setActionCommand("text");
         JBCursor.setPreferredSize(new Dimension(cursor.getIconWidth(), cursor.getIconHeight()));
