@@ -143,7 +143,7 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
     public void setSegmentsList(ArrayList<Segmento> segmentsList) {this.segmentsList = segmentsList;}
     public void setRectanglesList(ArrayList<Rettangolo> rectanglesList) {this.rectanglesList = rectanglesList;}
 
-    public void selectFigure()
+    public boolean selectFigure()
     {
         for(int i=0; i<segmentsList.size(); i++)
         {
@@ -162,7 +162,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                     segmentsList.get(i).setC(Color.CYAN);
                     selectedLine = true;
                     indexOfLine = i;
-                    break;
+                    repaint();
+                    return true;
                 }
             }
         }
@@ -179,7 +180,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 selectedCircle=true;
                 indexOfCircle=i;
                 circlesList.get(i).setC(Color.cyan);
-                break;
+                repaint();
+                return true;
             }
         }
         for (int i=0; i<rectanglesList.size(); i++)
@@ -196,7 +198,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 selectedRectangle=true;
                 indexOfRectangle=i;
                 rectanglesList.get(i).setC(Color.CYAN);
-                break;
+                repaint();
+                return true;
             }
         }
         for (int i=0; i<pointsList.size(); i++)
@@ -212,10 +215,12 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 selectedPoint=true;
                 indexOfPoint=i;
                 pointsList.get(i).setColor(Color.cyan);
-                break;
+                repaint();
+                return true;
             }
         }
-        repaint();
+
+        return false;
     }
     public void setFill(boolean f)
     {
@@ -335,7 +340,8 @@ public class DrawPanel extends JPanel implements MouseListener, MouseMotionListe
                 switch(figure)
                 {
                     case 0:
-                        selectFigure();
+                        if(!selectFigure())
+                            resetSelected();
                         break;
                     case 1:
                         segmentsList.add(new Segmento(new Punto(x1,y1, color,0), new Punto (x2,y2, color,0), color, thickness));
