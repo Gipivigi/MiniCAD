@@ -57,6 +57,7 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
         JPSidePanel.JBSave.addActionListener(this);
         JPSidePanel.JBLoad.addActionListener(this);
         JPSidePanel.JBDel.addActionListener(this);
+        JPSidePanel.JBInfo.addActionListener(this);
         JPLower.JCheck.addActionListener(this);
         JPLower.JMenu.addActionListener(this);
         JPCommand.JBTextBox.addActionListener(this);
@@ -258,6 +259,9 @@ public class FinestraMiniCAD extends JFrame implements ActionListener
                 JPDraw.add(jTextField);
                 jTextField.requestFocusInWindow(); // Permette alla casella di testo di ricevere il focus
                 repaint();
+                break;
+            case "info":
+                new MincadInstructions().setVisible(true);
                 break;
             default:
 
